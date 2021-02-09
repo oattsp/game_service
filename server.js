@@ -30,7 +30,7 @@ passport.use(jwtAuth)
 
 const requireJWTAuth = passport.authenticate('jwt',{session:false})
 
-app.get('/game', requireJWTAuth, async (req, res) => {
+app.get('/game', async (req, res) => {
     try {
         const result = await db.Games.findAll({
             order: [
