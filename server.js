@@ -62,25 +62,6 @@ app.get('/game/:id', requireJWTAuth, async (req, res) => {
     }
 })
 
-app.get('/game/code/:codegame', requireJWTAuth, async (req, res) => {
-    try {
-        const result = await db.Games.findAll({
-            where: {'code_game': req.params.codegame}
-        })
-        if (result) {
-            res.status(200).json(result)  
-        } else {
-            res.status(404).json({
-                message: 'game not found!!'
-            })  
-        }
-    } catch (error) {      
-        res.status(500).json({
-            message: error.message
-        })   
-    }
-})
-
 app.post('/game', requireJWTAuth, async (req, res) => {
     try {
         const game = await db.Games.create(req.body)
